@@ -19,7 +19,7 @@ author: Rafael García (IES Virgen del Carmen)
 
 ### Give reasons why you agree or disagree with them.
 
-# Do you have anyjob experience? (What?)
+# Do you have any job experience? (What?)
 
 # Which is better: working or doing nothing?  Why?
 
@@ -39,7 +39,7 @@ author: Rafael García (IES Virgen del Carmen)
 
 # How much salary can you get from this job?
 
-# Do you think this kind of job is easy to do?Why? / Why not?
+# Do you think this kind of job is easy to do? Why? / Why not?
 
 # Do you know anyone with this kind of job?  If ‘yes’, who?
 
