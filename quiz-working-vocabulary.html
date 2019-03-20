@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!-- 
+ How to Make a Simple JavaScript Quiz 
+ https://www.sitepoint.com/simple-javascript-quiz
+-->
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Quiz: vocabulary about working</title>
+    <!-- jquery for maximum compatibility -->
+	<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css">
+<!-- link type="text/css" rel="stylesheet" href="quiz-js.css" -->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js" integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
+
+body{
+    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
+    color: #333;
+  font-weight: 300;
+  text-align: center;
+  background-color: #f8f6f0;
+}
+
+h1{
+  font-weight: 300;
+  margin: 0px;
+  padding: 10px;
+  font-size: 2em;
+  background-color: #444;
+  color: #fff;
+}
+.question{
+  font-size: 1.6em;
+  margin-bottom: 10px;
+  line-height: 1.2em;
+}
+.answers {
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  text-align: left;
+  display: inline-block;
+}
+.answers label{
+  font-size: 1em;
+  line-height: 1.1em;
+  display: block;
+}
+button{
+  font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
+    background-color: #279;
+    color: #fff;
+    border: 0px;
+    border-radius: 3px;
+    padding: 18px;
+    cursor: pointer;
+    margin-bottom: 18px;
+}
+button:hover{
+    background-color: #38a;
+}
+
+.slide{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.active-slide{
+  opacity: 1;
+  z-index: 2;
+}
+.quiz-container{
+  position: relative;
+  height: 200px;
+  margin-top: 40px;
+}
+
+.buttons {
+   margin-top: 2.5em;
+}
+</style>
+</head>
+<body>
+<h1>14  vocabulary items about working</h1>
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+<div class="buttons">
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+</div>
+<div id="results"></div>
+
+<script>
+
+
+(function() {
+  const myQuestions = [
+    {
+      question: "Which of the following things does a job 'applicant' ask for?",
+      answers: {
+        a: "more money",
+        b: "a holiday",
+        c: "work",
+        d: "a coffe break"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Which of the following is an example of a job 'benefit'?",
+      answers: {
+        a: "paid holidays",
+        b: "co-workers",
+        c: "an employment office",
+        d: "a salary"
+      },
+      correctAnswer: "a"
+    },
+    {
+      question: "Which of the following is closest in meaning to 'bonus'?",
+      answers: {
+        a: "office",
+        b: "boss",
+        c: "money",
+        d: "job"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "When a job is 'challenging' then it is NOT ....?",
+      answers: {
+        a: "a part-time job",
+        b: "difficult",
+        c: "nine-to-five",
+        d: "easy"
+      },
+      correctAnswer: "d"
+    },
+    {
+      question: "When a person 'earns' money, then that person ....?",
+      answers: {
+        a: "counts money",
+        b: "makes money",
+        c: "saves money",
+        d: "loves money"
+      },
+      correctAnswer: "b"
+    },    {
+      question: "Which of the following is closest in meaning to 'employee'?",
+      answers: {
+        a: "worker",
+        b: "employer",
+        c: "promotion",
+        d: "application form"
+      },
+      correctAnswer: "a"
+    },    {
+      question: "When a company 'hires' someone they ....?",
+      answers: {
+        a: "give that person a job",
+        b: "make them change jobs",
+        c: "let that person quit",
+        d: "fire that person"
+      },
+      correctAnswer: "a"
+    },    {
+      question: "During a job 'interview' an employer will ....?",
+      answers: {
+        a: "relax and drink lots of coffe",
+        b: "ask many question",
+        c: "write a cover letter",
+        d: "work overtime"
+      },
+      correctAnswer: "b"
+    },    {
+      question: "Which of the following will you get if your give boss gives you a 'raise'?",
+      answers: {
+        a: "more work",
+        b: "more money",
+        c: "more holidays",
+        d: "more training"
+      },
+      correctAnswer: "b"
+    },    {
+      question: "Which of the following can a 'resume' tell you about a person?",
+      answers: {
+        a: "his or her name",
+        b: "his or her work experience",
+        c: "his or her phone number",
+        d: "all of the above"
+      },
+      correctAnswer: "d"
+    },    {
+      question: "Which of the following is closest in meaning to 'salary'?",
+      answers: {
+        a: "job",
+        b: "money",
+        c: "secretary",
+        d: "work place"
+      },
+      correctAnswer: "b"
+    },    {
+      question: "Which of the following is an example of a job 'skill'?",
+      answers: {
+        a: "being able to have a lunch break",
+        b: "being able to come to work on time",
+        c: "being able to use a computer",
+        d: "being able to call in sick"
+      },
+      correctAnswer: "c"
+    },    {
+      question: "Which of the following is closest in meaning to 'unemployed'?",
+      answers: {
+        a: "white collar",
+        b: "take time off",
+        c: "full-time",
+        d: "out of work"
+      },
+      correctAnswer: "d"
+    },
+    {
+      question: "In which of the following might you ind 'want ads'?",
+      answers: {
+        a: "on an application form",
+        b: "in a book",
+        c: "in a newspaper",
+        d: "none of the above"
+      },
+      correctAnswer: "c"
+    }
+
+  ];
+
+  function buildQuiz() {
+    // we'll need a place to store the HTML output
+    const output = [];
+
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // we'll want to store the list of answer choices
+      const answers = [];
+
+      // and for each available answer...
+      for (letter in currentQuestion.answers) {
+        // ...add an HTML radio button
+        answers.push(
+          `<label>
+             <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter})
+              ${currentQuestion.answers[letter]}
+           </label>`
+        );
+      }
+
+      // add this question and its answers to the output
+      output.push(
+        `<div class="slide">
+           <div class="question"> ${questionNumber + 1}.- ${currentQuestion.question} </div>
+           <div class="answers"> ${answers.join("")} </div>
+         </div>`
+      );
+    });
+
+    // finally combine our output list into one string of HTML and put it on the page
+    quizContainer.innerHTML = output.join("");
+  }
+
+  function showResults() {
+    // gather answer containers from our quiz
+    const answerContainers = quizContainer.querySelectorAll(".answers");
+
+    // keep track of user's answers
+    let numCorrect = 0;
+
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // find selected answer
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+      // if answer is correct
+      if (userAnswer === currentQuestion.correctAnswer) {
+        // add to the number of correct answers
+        numCorrect++;
+
+        // color the answers green
+        answerContainers[questionNumber].style.color = "lightgreen";
+      } else {
+        // if answer is wrong or blank
+        // color the answers red
+        answerContainers[questionNumber].style.color = "red";
+      }
+    });
+
+    // show number of correct answers out of total
+    resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+  }
+
+  function showSlide(n) {
+    slides[currentSlide].classList.remove("active-slide");
+    slides[n].classList.add("active-slide");
+    currentSlide = n;
+    
+    if (currentSlide === 0) {
+      previousButton.style.display = "none";
+    } else {
+      previousButton.style.display = "inline-block";
+    }
+    
+    if (currentSlide === slides.length - 1) {
+      nextButton.style.display = "none";
+      submitButton.style.display = "inline-block";
+    } else {
+      nextButton.style.display = "inline-block";
+      submitButton.style.display = "none";
+    }
+  }
+
+  function showNextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function showPreviousSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
+
+  // display quiz right away
+  buildQuiz();
+
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  const slides = document.querySelectorAll(".slide");
+  let currentSlide = 0;
+
+  showSlide(0);
+
+  // on submit, show results
+  submitButton.addEventListener("click", showResults);
+  previousButton.addEventListener("click", showPreviousSlide);
+  nextButton.addEventListener("click", showNextSlide);
+})();
+
+
+</script>
+</body>
+</html>

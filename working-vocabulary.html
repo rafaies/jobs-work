@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<!-- 
+ Accordion Multi Menu
+ https://codepen.io/meness/pen/BuaeI
+-->
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Vocabulary about working</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- jquery for maximum compatibility -->
+	<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css">
+<!-- link type="text/css" rel="stylesheet" href="quiz-js.css" -->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js" integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style>
+/*
+ * Developer: Alireza Eskandarpour Shoferi
+ * Designer: Nevide (codecanyon.net/user/Nevide)
+ *
+ * Distributed under the terms of the MIT license
+ * https://opensource.org/licenses/MIT
+ */
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+a {
+    color: #646464;
+    text-decoration: none;
+}
+body {
+    background-color: #64D7E2;
+    font-family: "Source Sans Pro", sans-serif;
+}
+.wrapper {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    
+    width: 280px;
+
+    background-color: #fff;
+    box-shadow: 0 4px 10px #7A9BAC;
+    font-size: 1.5em;
+   z-index: -1;
+}
+.items {
+    padding: 28px 0;
+}
+.items > li > a {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    text-indent: 18px;
+    line-height: 39px;
+}
+.items > li > a::after {
+    position: absolute;
+    right: 30px;
+    margin-top: 2px;
+    font-family: "FontAwesome"
+}
+.items > li > a::after {
+    right: 30px;
+    content: "\f061";
+}
+.itemHover {
+    color: #fff;
+    font-weight: 600;
+    transition: background-color .4s ease-in-out;
+}
+.items > li > a:hover {
+    background-color: #8EE8F1;
+    .itemHover
+}
+.items > li > a.expanded {
+    background-color: #64D7E2;
+    .itemHover
+}
+.items > li > a.expanded::after {
+    content: "\f063";
+}
+.sub-items > li:first-child > a {
+    margin-top: 17px;
+    height: 34px;
+}
+.sub-items > li:last-child > a {
+    margin-bottom: 17px;
+    height: 34px;
+}
+.sub-items a {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 212px;
+    text-indent: 24px;
+    line-height: 39px;
+}
+.sub-items a {
+    border-left: 2px solid #64D7E2;
+}
+.sub-items .current {
+    position: relative;
+    color: #64D7E2;
+    border-color: white;
+}
+.sub-items > li:hover > a {
+    color: #64D7E2;
+    transition: color 0.4s ease-in-out;
+}
+.sub-items {
+    display: none;
+}
+
+/*
+https://www.w3schools.com/howto/howto_js_sticky_header.asp
+*/
+ /* Style the header */
+.header {
+  padding: 10px 16px;
+  /* background: #555; */
+  width: 70%;
+  left: 30%;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  /* width: 70%; */
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+} 
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="panel panel-primary">
+    <div class="panel-heading"><h1>Vocabulary about working</h1></div>
+    <div class="panel-body"><h2>Reference: <a href="https://www.allthingstopics.com/uploads/2/3/2/9/23290220/wordbank_working-63.pdf">wordbank_working-63.pdf</a></h2></div>
+  </div>
+  </div>
+
+<div class="container header" id="myHeader">
+  <div class="btn-toolbar">
+    <div class="btn-group btn-group-sm">
+      <button class="btn btn-default">A</button>
+      <button class="btn btn-default">B</button>
+      <button class="btn btn-default">C</button>
+      <button class="btn btn-default">E</button>
+      <button class="btn btn-default">F</button>
+      <button class="btn btn-default">H</button>
+      <button class="btn btn-default">I</button>
+      <button class="btn btn-default">J</button>
+      <button class="btn btn-default">L</button>
+      <button class="btn btn-default">M</button>
+      <button class="btn btn-default">N</button>
+      <button class="btn btn-default">O</button>
+      <button class="btn btn-default">P</button>
+      <button class="btn btn-default">Q</button>
+      <button class="btn btn-default">R</button>
+      <button class="btn btn-default">S</button>
+      <button class="btn btn-default">T</button>
+      <button class="btn btn-default">U</button>
+      <button class="btn btn-default">W</button>
+    </div>
+  </div>
+</div>
+<div class="wrapper content container">
+  <ul class="items">
+    <li>
+      <a href="#" id="A">A</a>
+      <ul class="sub-items" style="display: none;">
+        <li>
+          <a href="#">applicant</a>
+        </li>
+        <li>
+          <a href="#">application form</a>
+        </li>
+        <li>
+          <a href="#">apply</a>
+        </li>
+        <li>
+          <a href="#">ask for a raise</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="B">B</a>
+      <ul class="sub-items" style="display: none;">
+        <li>
+          <a href="#">benefits</a>
+        </li>
+        <li>
+          <a href="#">blue collar</a>
+        </li>
+        <li>
+          <a href="#">bonus</a>
+        </li>
+        <li>
+          <a href="#">boss</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="C">C</a>
+      <ul class="sub-items" style="display: none;">
+        <li>
+          <a href="#">call in sick</a>
+        </li>
+        <li>
+          <a href="#">challenging</a>
+        </li>
+        <li>
+          <a href="#">change jobs</a>
+        </li>
+        <li>
+          <a href="#">coffee break</a>
+        </li>
+        <li>
+          <a href="#">company</a>
+        </li>
+        <li>
+          <a href="#">cover letter</a>
+        </li>
+        <li>
+          <a href="#">co-worker</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="E">E</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">earn</a>
+        </li>
+        <li>
+          <a href="#">employ</a>
+        </li>
+        <li>
+          <a href="#">employee</a>
+        </li>
+        <li>
+          <a href="#">employer</a>
+        </li>
+        <li>
+          <a href="#">employment office</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="F">F</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">fire</a>
+        </li>
+        <li>
+          <a href="#">full-time</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="H">H</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">hire</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="I">I</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">interview</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="J">J</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">job</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="L">L</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">late for work</a>
+        </li>
+        <li>
+          <a href="#">​look for work</a>
+        </li>
+        <li>
+          <a href="#">​lunch break</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="M">M</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">make money</a>
+        </li>
+        <li>
+          <a href="#">manager</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="N">N</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">nine-to-five</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="O">O</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">office work</a>
+        </li>
+        <li>
+          <a href="#">on time</a>
+        </li>
+        <li>
+          <a href="#">out of work</a>
+        </li>
+        <li>
+          <a href="#">overtime</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="P">P</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">part-time</a>
+        </li>
+        <li>
+          <a href="#">pay</a>
+        </li>
+        <li>
+          <a href="#">pension</a>
+        </li>
+        <li>
+          <a href="#">position</a>
+        </li>
+        <li>
+          <a href="#">promote</a>
+        </li>
+        <li>
+          <a href="#">promotion</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="Q">Q</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">qualified</a>
+        </li>
+        <li>
+          <a href="#">qualifications</a>
+        </li>
+        <li>
+          <a href="#">quit</a>
+        </li>
+        <li>
+          <a href="#">quitting time</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="R">R</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">raise</a>
+        </li>
+        <li>
+          <a href="#">resume</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="S">S</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">salary</a>
+        </li>
+        <li>
+          <a href="#">sick leave</a>
+        </li>
+        <li>
+          <a href="#">skills</a>
+        </li>
+        <li>
+          <a href="#">skilled worker</a>
+        </li>
+        <li>
+          <a href="#">summer job</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="T">T</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">take time off</a>
+        </li>
+        <li>
+          <a href="#">train</a>
+        </li>
+        <li>
+          <a href="#">training</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="U">U</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">unemployed</a>
+        </li>
+        <li>
+          <a href="#">unemployment</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" id="W">W</a>
+      <ul class="sub-items">
+        <li>
+          <a href="#">want ads</a>
+        </li>
+        <li>
+          <a href="#">white collar</a>
+        </li>
+        <li>
+          <a href="#">work</a>
+        </li>
+        <li>
+          <a href="#">worker</a>
+        </li>
+        <li>
+          <a href="#">work place</a>
+        </li>
+        <li>
+          <a href="#">working hours</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+<script>
+// https://codepen.io/meness/pen/BuaeI
+// https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
+
+$(".items > li > a").click(function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    if ($this.hasClass("expanded")) {
+        $this.removeClass("expanded");
+    } else {
+        $(".items a.expanded").removeClass("expanded");
+        $this.addClass("expanded");
+        $(".sub-items").filter(":visible").slideUp("normal");
+    }
+    $this.parent().children("ul").stop(true, true).slideToggle("normal");
+});
+
+$(".sub-items a").click(function() {
+    $(".sub-items a").removeClass("current");
+    $(this).addClass("current");
+});
+
+$("button").click(function() {
+    var select = "#" + $(this).text() ;
+    $(select).trigger("click");
+ $([document.documentElement, document.body]).animate({
+        scrollTop: $(select).offset().top
+    }, 1500);
+});
+</script>
+<script>
+// https://www.w3schools.com/howto/howto_js_sticky_header.asp
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+</body>
+</html>
