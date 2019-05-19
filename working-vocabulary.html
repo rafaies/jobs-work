@@ -13,11 +13,17 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- jquery for maximum compatibility -->
 	<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css">
-<!-- link type="text/css" rel="stylesheet" href="quiz-js.css" -->
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
-	<script src="https://code.jquery.com/jquery-1.11.1.min.js" integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE=" crossorigin="anonymous"></script>
+	<script
+			  src="https://code.jquery.com/jquery-2.2.4.min.js"
+			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+			  crossorigin="anonymous"></script>
+
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/iziModal.min.css">
+
 <style>
+
 /*
  * Developer: Alireza Eskandarpour Shoferi
  * Designer: Nevide (codecanyon.net/user/Nevide)
@@ -148,6 +154,7 @@ https://www.w3schools.com/howto/howto_js_sticky_header.asp
 } 
 </style>
 </head>
+
 <body>
 <div class="container">
 
@@ -182,6 +189,7 @@ https://www.w3schools.com/howto/howto_js_sticky_header.asp
     </div>
   </div>
 </div>
+
 <div class="wrapper content container">
   <ul class="items">
     <li>
@@ -197,7 +205,7 @@ https://www.w3schools.com/howto/howto_js_sticky_header.asp
           <a href="#">apply</a>
         </li>
         <li>
-          <a href="#">ask for a raise</a>
+          <a href="#" data-splitting>ask for a raise</a>
         </li>
       </ul>
     </li>
@@ -471,7 +479,15 @@ https://www.w3schools.com/howto/howto_js_sticky_header.asp
   </ul>
 </div>
 
+<script>
+$(".sub-items a").each(function( ) {
+  var word = $(this).text().replace(/ /g,"-");
+  $(this).attr("href", "http://dictionary.cambridge.org/dictionary/english-spanish/" + word);
+  $(this).addClass("trigger");
+  //$(this).attr('target','_blank');
+});
 
+</script>
 <script>
 // https://codepen.io/meness/pen/BuaeI
 // https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2
@@ -522,5 +538,19 @@ function myFunction() {
   }
 } 
 </script>
+<!-- http://izimodal.marcelodolza.com/ -->
+<script src="js/iziModal.min.js" type="text/javascript"></script>
+ <script>
+       $(document).on('click', '.trigger', function (event) {
+    event.preventDefault();
+    $('#modal-iframe').iziModal('open', event); // Use "event" to get URL href
+});
+
+   $("#modal-iframe").iziModal({
+    iframe: true,
+    iframeHeight: 400,
+    title: 'Cambridge Dictionary'
+});
+    </script>
 </body>
 </html>
